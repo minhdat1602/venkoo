@@ -8,13 +8,13 @@ pipeline {
          }
         stage('Build'){
             steps{
-                sh 'cd /var/jenkins_home/workspace/venkoo/Venko'
+                sh 'cd /var/jenkins_home/workspace/Venko/Venko'
                 sh './mvnw clean install'
             }
         }
         stage('Test'){
             steps{
-                sh 'cd /var/jenkins_home/workspace/venkoo/Venko'
+                sh 'cd /var/jenkins_home/workspace/Venko/Venko'
                 sh './mvnw test'
             }
         }
@@ -22,7 +22,7 @@ pipeline {
             steps{
                 // This step should not normally be used in your script. Consult the inline help for details.
                 withDockerRegistry(credentialsId: '59ce4ba3-3524-434a-9ea8-c01b36f1e1d5', url: 'https://index.docker.io/v1/') {
-                    sh 'cd /var/jenkins_home/workspace/venkoo/Venko'
+                    sh 'cd /var/jenkins_home/workspace/Venko/Venko'
                     sh 'docker build -t minhdat16/venko .'
                     sh 'docker push minhdat1602/venkoo'
                 }

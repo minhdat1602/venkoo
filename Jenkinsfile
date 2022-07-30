@@ -1,5 +1,8 @@
 pipeline {
      agent any
+    getDatabaseConnection(id: 'venko', type: 'GLOBAL') {
+        // some block
+    }
      stages {
          stage('Clone') {
              steps{
@@ -12,7 +15,7 @@ pipeline {
                 dir('Venko') {
                     sh 'pwd'
                     sh 'chmod 777 ./mvnw'
-                    sh './mvnw clean install'
+                    sh './mvnw package'
                 }
             }
         }

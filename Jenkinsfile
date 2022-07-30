@@ -11,16 +11,16 @@ pipeline {
             steps{
                 sh 'cd /var/jenkins_home/workspace/VenkoName'
                 dir('Venko') {
-                    sh 'pwd'
-                    sh 'chmod 777 ./mvnw'
                     sh './mvnw package'
                 }
             }
         }
         stage('Test'){
             steps{
-                sh 'cd /var/jenkins_home/workspace/Venko/Venko'
-                sh './mvnw test'
+                sh 'cd /var/jenkins_home/workspace/VenkoName'
+                dir('Venko') {
+                    sh './mvnw test'
+                }
             }
         }
         stage('Deploy'){

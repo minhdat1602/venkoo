@@ -23,7 +23,7 @@ import java.util.List;
 @ActiveProfiles("test")
 public class ItemRepositoryTest {
 
-    @MockBean
+    @Autowired
     private ItemRepository itemRepository;
 
     @Test

@@ -18,7 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @ActiveProfiles("test")
 public class TaskRepositoryTest {
 
-    @MockBean
+    @Autowired
     private TaskRepository taskRepository;
 
     @Test

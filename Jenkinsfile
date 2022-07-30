@@ -12,7 +12,7 @@ pipeline {
                 sh 'ls'
                 sh 'pwd'
                 sh 'chmod 777 Venko'
-                cd "Venko"
+                sh "cd Venko"
                 sh './Venko/mvnw package'
             }
         }

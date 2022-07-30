@@ -44,7 +44,9 @@ public class ItemRepositoryTest {
         item.setCode("New Code");
         item.setName("New Name");
 
-        Item existsItem = itemRepository.findById(1l).get();
+        item = itemRepository.save(item);
+
+        Item existsItem = itemRepository.findById(item.getId()).get();
         existsItem.setCode(item.getCode());
         existsItem.setName(item.getName());
 

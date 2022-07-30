@@ -11,7 +11,7 @@ pipeline {
                 sh 'cd /var/jenkins_home/workspace/VenkoName/Venko'
                 sh 'ls'
                 sh 'pwd'
-                sh 'chmod 999 Venko'
+                sh 'chmod 777 Venko'
                 cd "Venko"
                 sh './Venko/mvnw package'
             }

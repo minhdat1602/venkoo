@@ -9,10 +9,8 @@ pipeline {
         stage('Build'){
             steps{
                 sh 'cd /var/jenkins_home/workspace/Venko/Venko/'
-                sh 'cd /Venko/'
-                sh 'ls'
-                sh 'chmod 777 ./mvnw'
-                sh 'mvnw clean install'
+                sh 'chmod 777 ./Venko/mvnw'
+                sh './Venko/mvnw clean install'
             }
         }
         stage('Test'){

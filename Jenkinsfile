@@ -11,6 +11,7 @@ pipeline {
             steps{
                 sh 'cd /var/jenkins_home/workspace/VenkoName'
                 dir('Venko') {
+                    sh 'chmod 777 ./mvnw'
                     sh './mvnw package'
                 }
             }

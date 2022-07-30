@@ -8,7 +8,7 @@ pipeline {
          }
         stage('Build'){
             steps{
-                sh 'cd /var/jenkins_home/workspace/VenkoName/Venko/'
+                sh 'cd /var/jenkins_home/workspace/VenkoName/Venko'
                 sh 'ls'
                 sh 'pwd'
                 sh './mvnw package'

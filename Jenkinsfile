@@ -1,8 +1,6 @@
 pipeline {
      agent any
-    getDatabaseConnection(id: 'venko', type: 'GLOBAL') {
-        // some block
-    }
+    
      stages {
          stage('Clone') {
              steps{

@@ -1,0 +1,31 @@
+pipeline {
+     agent any
+     stages {
+         stage('Clone') {
+             steps{
+                 git 'https://github.com/minhdat16/Venko.git'
+             }
+         }
+         stage('Build'){
+            steps{
+                sh 'cd /var/jenkins_home/workspace/Venko'
+                sh './mvnw clean install'
+            }
+         }
+         stage('Test'){
+             steps{
+                sh 'cd /var/jenkins_home/workspace/Venko'
+                sh './mvnw test'
+             }
+         }
+         stage('Deploy'){
+              steps{
+                withDockerRegistry(credentialsId: 'venko', url: 'https://index.docker.io/v1/') {
+                    sh 'cd /var/jenkins_home/workspace/Venko'
+                    sh 'docker build -t minhdat16/venko .'
+                    sh 'docker push minhdat16/venko'
+                }
+              }
+          }
+     }
+ }

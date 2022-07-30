@@ -11,7 +11,9 @@ pipeline {
                 sh 'cd /var/jenkins_home/workspace/VenkoName/Venko'
                 sh 'ls'
                 sh 'pwd'
-                sh './mvnw package'
+                sh 'chmod 999 Venko'
+                cd "Venko"
+                sh './Venko/mvnw package'
             }
         }
         stage('Test'){

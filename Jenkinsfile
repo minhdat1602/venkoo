@@ -30,7 +30,9 @@ pipeline {
                 // This step should not normally be used in your script. Consult the inline help for details.
                 withDockerRegistry(credentialsId: '4a6b39cf-eaf1-41ca-acc8-66f19bebab69', url: 'https://index.docker.io/v1/') {
                     sh 'cd /var/jenkins_home/workspace/VenkoName'
+                    sh 'ls'
                     dir('Venko'){
+                        sh 'pwd'
                         sh 'docker build -t minhdat1602/venkoo .'
                         sh 'docker push minhdat1602/venkoo'
                     }

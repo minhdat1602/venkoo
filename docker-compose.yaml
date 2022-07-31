@@ -25,21 +25,10 @@ services:
         "spring.datasource.username" : "$MYSQLDB_USER",
         "spring.datasource.password" : "$MYSQLDB_ROOT_PASSWORD",
         "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.MySQL5InnoDBDialect",
-        "spring.jpa.hibernate.ddl-auto" : "update"
-      }'
+        "spring.jpa.hibernate.ddl-auto" : "update"}'
     volumes:
       - .m2:/root/.m2
     stdin_open: true
     tty: true
-  jenkins:
-    image: jenkins/jenkins:lts
-    restart: unless-stopped
-    env_file: ./.env
-    ports:
-      - 8080:8080
-      - 50000:50000
-    volumes:
-      - jenkins: /var/jenkins_home
-    
 volumes:
   db:

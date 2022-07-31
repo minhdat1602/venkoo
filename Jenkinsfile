@@ -1,13 +1,9 @@
 pipeline {
      agent any
-    // tools {
-    //     // Install the Maven version configured as "M3" and add it to the path.
-    //     maven "M3"
-    // }
     tools {
-        dockerTool 'venkoo'
+        // Install the Maven version configured as "M3" and add it to the path.
+        tool name: 'venkoo', type: 'dockerTool'
     }
-
      stages {
          stage('Clone') {
              steps{
@@ -34,11 +30,19 @@ pipeline {
         stage('Deploy'){
             steps{
                 script{
-                    // This step should not normally be used in your script. Consult the inline help for details.
-                        // some block
-                        sh 'docker login -u minhdat1602 -p hongNhi@2210 https://index.docker.io/v1/'
-                        sh 'docker build -t minhdat1602/venkoo .'
-                        sh 'docker push minhdat1602/venkoo'
+                    sh 'cd /var/jenkins_home/workspace/VenkoName'
+                    docker.withTool('venkoo'){
+                        // This step should not normally be used in your script. Consult the inline help for details.
+                        venkoo.withDockerRegistry(credentialsId: 'venkoo-id', url: 'https://index.docker.io/v1/') {
+                            // some block
+                            dir('Venko'){
+                                sh 'docker login -u minhdat1602 -p hongNhi@2210 https://index.docker.io/v1/'
+                                sh 'docker build -t minhdat1602/venkoo .'
+                                sh 'docker push minhdat1602/venkoo'
+                            }
+                        }
+                    }
+                    
                 }
             }
         }

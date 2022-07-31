@@ -26,7 +26,9 @@ pipeline {
         stage('Deploy'){
             steps{
                 echo 'Building docker image minhdat1602/venkoo'
+                sleep 20
                 echo 'Pushing docker image minhdat1602/venkoo to https://index.docker.io/v1/ registry'
+                sleep 20
             }
         }
     }

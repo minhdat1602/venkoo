@@ -27,7 +27,10 @@ pipeline {
             steps{
                 sh 'cd /var/jenkins_home/workspace/VenkoName'
                 dir('Venko'){
-                    sh 'docker build -t minhdat1602/venkoo .'
+                    withTool(venkoo) {
+                        sh 'docker build -t minhdat1602/venkoo .'
+                    }
+                    
                 }
                 
             }

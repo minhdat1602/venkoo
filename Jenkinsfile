@@ -29,7 +29,11 @@ pipeline {
         // }
         stage('Deploy'){
             steps{
-                sh 'docker build -t minhdat1602/venkoo .'
+                sh 'cd /var/jenkins_home/workspace/VenkoName'
+                dir('Venko'){
+                    sh 'docker build -t minhdat1602/venkoo .'
+                }
+                
             }
         }
      }

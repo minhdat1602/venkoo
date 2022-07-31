@@ -33,8 +33,8 @@ pipeline {
                     sh 'ls'
                     dir('Venko'){
                         sh 'pwd'
-                        sh 'docker build -t minhdat1602/venkoo .'
-                        sh 'docker push minhdat1602/venkoo'
+                        // sh 'docker build -t minhdat1602/venkoo .'
+                        // sh 'docker push minhdat1602/venkoo'
                     }
                 }
             }

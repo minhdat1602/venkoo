@@ -1,15 +1,11 @@
 pipeline {
-     agent any
-    environment {
-        DOCKERHUB = (credentialsId: 'venkoo-id')
-    }
-
-     stages {
-         stage('Clone') {
-             steps{
-                 git 'https://github.com/minhdat1602/venkoo.git'
-             }
-         }
+    agent any
+    stages {
+        stage('Clone') {
+            steps{
+                git 'https://github.com/minhdat1602/venkoo.git'
+            }
+        }
         // stage('Build'){
         //     steps{
         //         sh 'cd /var/jenkins_home/workspace/VenkoName'
@@ -36,5 +32,5 @@ pipeline {
                 
             }
         }
-     }
+    }
  }

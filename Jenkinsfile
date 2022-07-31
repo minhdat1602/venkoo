@@ -28,15 +28,17 @@ pipeline {
             steps{
                 // This step should not normally be used in your script. Consult the inline help for details.
                 sh 'pwd'
-                withDockerRegistry(credentialsId: 'venkoo-id', url: 'https://index.docker.io/v1/') {
-                    sh 'cd /var/jenkins_home/workspace/VenkoName'
-                    sh 'ls'
-                    dir('Venko'){
-                        sh 'pwd'
-                        // sh 'docker build -t minhdat1602/venkoo .'
-                        // sh 'docker push minhdat1602/venkoo'
-                    }
-                }
+                sh 'cd /var/jenkins_home/workspace/VenkoName'
+                step([$class: 'DockerBuilderPublisher', cleanImages: false, cleanupWithJenkinsJobDelete: false, cloud: '', dockerFileDirectory: './Venko', fromRegistry: [credentialsId: 'venkoo-id', url: 'https://index.docker.io/v1/'], pushCredentialsId: 'venkoo-id', pushOnSuccess: true, tagsString: 'minhdat1602/venkoo'])
+                // withDockerRegistry(credentialsId: 'venkoo-id', url: 'https://index.docker.io/v1/') {
+                //     sh 'cd /var/jenkins_home/workspace/VenkoName'
+                //     sh 'ls'
+                //     dir('Venko'){
+                //         sh 'pwd'
+                //         // sh 'docker build -t minhdat1602/venkoo .'
+                //         // sh 'docker push minhdat1602/venkoo'
+                //     }
+                // }
             }
         }
      }

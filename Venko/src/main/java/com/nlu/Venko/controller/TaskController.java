@@ -3,6 +3,8 @@ package com.nlu.Venko.controller;
 import com.nlu.Venko.payload.request.TaskRequest;
 import com.nlu.Venko.service.TaskService;
 import org.apache.coyote.Response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,9 +17,11 @@ public class TaskController {
 
     @Autowired
     private TaskService taskService;
+    Logger logger = LoggerFactory.getLogger(TaskController.class);
 
     @PostMapping
     public ResponseEntity<?> add(@RequestBody TaskRequest taskRequest, @PathVariable("itemId") Long itemId){
+        logger.info("Add task in item: " + itemId + " Task: " + taskRequest.getTitle());
         return ResponseEntity.ok(taskService.add(taskRequest, itemId));
     }
 

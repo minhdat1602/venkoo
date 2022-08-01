@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @SpringBootApplication
 public class VenkoApplication {
-
+                                                          
 	public static void main(String[] args) {
 		SpringApplication.run(VenkoApplication.class, args);
 	}

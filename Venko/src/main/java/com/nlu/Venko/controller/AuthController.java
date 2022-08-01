@@ -16,6 +16,8 @@ import com.nlu.Venko.repository.UserRepository;
 import com.nlu.Venko.security.jwt.JwtUtils;
 import com.nlu.Venko.security.service.UserDetailsImpl;
 import com.nlu.Venko.service.impl.RefreshTokenService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -26,6 +28,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -48,10 +51,13 @@ public class AuthController {
     @Autowired
     RefreshTokenService refreshTokenService;
 
+    Logger logger = LoggerFactory.getLogger(AuthController.class);
+
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
         Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+        logger.info("Login with username: " + loginRequest.getUsername());
         SecurityContextHolder.getContext().setAuthentication(authentication);
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         String jwt = jwtUtils.generateJwtToken(userDetails);
@@ -78,6 +84,7 @@ public class AuthController {
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
+            logger.info("Register with exists email: " + signUpRequest.getUsername());
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Error: Username is already taken!"));
@@ -119,6 +126,7 @@ public class AuthController {
             });
         }
         user.setRoles(roles);
+        logger.info("Register is successfully: " + signUpRequest.getUsername() + " " + signUpRequest.getEmail() + " Roles: " + roles.toString());
         userRepository.save(user);
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }

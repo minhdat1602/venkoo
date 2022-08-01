@@ -7,11 +7,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-<<<<<<< HEAD
-@SpringBootApplication()
-=======
 @SpringBootApplication
->>>>>>> 8ed1c8e5003e93e40f27664b5f98856f545b897a
 public class VenkoApplication {
 
 	public static void main(String[] args) {
